@@ -2,6 +2,7 @@ package ru.moogen.words;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class FileLoader {
@@ -31,6 +32,7 @@ public class FileLoader {
                     , example, false);
             result.add(word);
         }
+        Collections.sort(result);
         return result;
     }
 }
