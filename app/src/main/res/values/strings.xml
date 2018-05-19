@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">words</string>
+    <string name="app_name">Слово дня</string>
+    <string name="date_format">dd.MM.yyyy</string>
+    <string name="short_date_format">d MMMM</string>
+    <string name="locale">ru</string>
 </resources>

@@ -1,0 +1,132 @@
+package ru.moogen.words;
+
+import android.content.res.Resources;
+import android.support.annotation.NonNull;
+
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class Word implements Comparable<Word> {
+
+    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy",
+            new Locale("ru"));
+    private static SimpleDateFormat SHORT_DATE_FORMAT = new SimpleDateFormat("d MMMM",
+            new Locale("ru"));
+
+    private int id;
+    private String date;
+    private String name;
+    private String additionalName;
+    private String etim;
+    private String description;
+    private String example;
+    private boolean favourite;
+
+
+    public static SimpleDateFormat getDateFormat() {
+        return DATE_FORMAT;
+    }
+
+    public static SimpleDateFormat getShortDateFormat() {
+        return SHORT_DATE_FORMAT;
+    }
+
+    public static void setDateFormat(Resources res){
+        DATE_FORMAT = new SimpleDateFormat(res.getString(R.string.date_format),
+                new Locale(res.getString(R.string.locale)));
+        SHORT_DATE_FORMAT = new SimpleDateFormat(res.getString(R.string.short_date_format),
+                new Locale(res.getString(R.string.locale)));
+    }
+
+    public Word(int id, String date, String name, String additionalName, String etim,
+                String description, String example, boolean favourite) {
+        this.id = id;
+        this.date = date;
+        this.name = name;
+        this.additionalName = additionalName;
+        this.etim = etim;
+        this.description = description;
+        this.example = example;
+        this.favourite = favourite;
+    }
+
+    @Override
+    public int compareTo(@NonNull Word o) {
+        Date thisDate = DATE_FORMAT.parse(this.date, new ParsePosition(0));
+        Date oDate = DATE_FORMAT.parse(o.getDate(), new ParsePosition(0));
+
+        if (thisDate.getTime() > oDate.getTime()){
+            return 1;
+        }
+        if (thisDate.getTime() < oDate.getTime()){
+            return -1;
+        }
+        return 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAdditionalName() {
+        return additionalName;
+    }
+
+    public void setAdditionalName(String additionalName) {
+        this.additionalName = additionalName;
+    }
+
+    public String getEtim() {
+        return etim;
+    }
+
+    public void setEtim(String etim) {
+        this.etim = etim;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getExample() {
+        return example;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+}
