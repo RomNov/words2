@@ -66,6 +66,20 @@ public class Word implements Comparable<Word> {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("id = ").append(id)
+                .append("; date = ").append(date)
+                .append("; name = ").append(name)
+                .append("; additionalName = ").append(additionalName)
+                .append("; etim = ").append(etim)
+                .append("; description = ").append(description)
+                .append("; example = ").append(example)
+                .append("; favourite = ").append(favourite);
+        return stringBuilder.toString();
+    }
+
     public int getId() {
         return id;
     }
