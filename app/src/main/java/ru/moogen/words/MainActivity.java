@@ -1,5 +1,6 @@
 package ru.moogen.words;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        DataHelper dataHelper = new DataHelper(this);// todo just delete this rows
+        SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();// todo just delete this rows
 
 
     }

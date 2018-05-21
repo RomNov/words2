@@ -3,6 +3,7 @@ package ru.moogen.words;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +24,7 @@ public class Word implements Comparable<Word> {
     private String description;
     private String example;
     private boolean favourite;
+    private Date dateClassDate;
 
 
     public static SimpleDateFormat getDateFormat() {
@@ -50,20 +52,18 @@ public class Word implements Comparable<Word> {
         this.description = description;
         this.example = example;
         this.favourite = favourite;
+        try {
+            dateClassDate = DATE_FORMAT.parse(date);
+            System.out.println(dateClassDate);//todo just delete this
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("erorrr 12345");//todo just delete this
+        }
     }
 
     @Override
-    public int compareTo(@NonNull Word o) {
-        Date thisDate = DATE_FORMAT.parse(this.date, new ParsePosition(0));
-        Date oDate = DATE_FORMAT.parse(o.getDate(), new ParsePosition(0));
-
-        if (thisDate.getTime() > oDate.getTime()){
-            return 1;
-        }
-        if (thisDate.getTime() < oDate.getTime()){
-            return -1;
-        }
-        return 0;
+    public int compareTo(Word o) {
+        return this.id - o.getId();
     }
 
     @Override

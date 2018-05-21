@@ -11,6 +11,7 @@ public class FileLoader {
         ArrayList<String> result = new ArrayList<>();
         Scanner scanner = new Scanner(inputStream, charset);
         scanner.useDelimiter("\n");
+        scanner.next();
         while (scanner.hasNext()){
             result.add(scanner.next());
         }
@@ -32,7 +33,14 @@ public class FileLoader {
                     , example, false);
             result.add(word);
         }
+
+        for (int i = 0; i < result.size(); i++) { // todo just delete this rows
+            System.out.println(result.get(i)); // todo just delete this rows
+        } // todo just delete this rows
+
+
         Collections.sort(result);
+        System.out.println("sort over"); // todo just delete this rows
         return result;
     }
 }
