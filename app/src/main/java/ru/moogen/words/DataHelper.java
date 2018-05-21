@@ -119,12 +119,7 @@ public class DataHelper extends SQLiteOpenHelper {
         }
             // END INSERT DATA TO DATABASE --------------------------------------------------------
 
-        System.out.println(sqlInsert);// todo just delete this rows
         db.execSQL(sqlInsert.toString());
-
-
-
-
     }
 
     @Override

@@ -15,8 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        DataHelper dataHelper = new DataHelper(this);// todo just delete this rows
-        SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();// todo just delete this rows
+
 
 
     }

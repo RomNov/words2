@@ -52,12 +52,11 @@ public class Word implements Comparable<Word> {
         this.description = description;
         this.example = example;
         this.favourite = favourite;
+
         try {
             dateClassDate = DATE_FORMAT.parse(date);
-            System.out.println(dateClassDate);//todo just delete this
         } catch (ParseException e) {
             e.printStackTrace();
-            System.out.println("erorrr 12345");//todo just delete this
         }
     }
 
