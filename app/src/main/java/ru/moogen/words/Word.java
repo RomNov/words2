@@ -1,10 +1,8 @@
 package ru.moogen.words;
 
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
 
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

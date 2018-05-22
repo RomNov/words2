@@ -1,6 +1,7 @@
 package ru.moogen.words;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -41,6 +42,41 @@ public class DataHelper extends SQLiteOpenHelper {
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
+    }
+
+    public ArrayList<Word> getWordsFromDB(SQLiteDatabase db){
+        ArrayList<Word> result = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_WORDS_NAME, null, null, null
+        , null, null, COLUMN_ID);
+
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+            String date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE));
+            String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+            String additionalName = null;
+            if (!cursor.isNull(cursor.getColumnIndex(COLUMN_ADDITIONAL_NAME))){
+                additionalName = cursor.getString(cursor.getColumnIndex(COLUMN_ADDITIONAL_NAME));
+            }
+            String etim = null;
+            if (!cursor.isNull(cursor.getColumnIndex(COLUMN_ETIM))){
+                etim = cursor.getString(cursor.getColumnIndex(COLUMN_ETIM));
+            }
+            String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
+            String example = null;
+            if (!cursor.isNull(cursor.getColumnIndex(COLUMN_EXAMPLE))){
+                example = cursor.getString(cursor.getColumnIndex(COLUMN_EXAMPLE));
+            }
+            int favor = cursor.getInt(cursor.getColumnIndex(COLUMN_FAVOURITE));
+            boolean favorite = favor == 1;
+
+            Word word = new Word(id, date, name, additionalName, etim, description, example, favorite);
+            result.add(word);
+            }
+            Word lastWord = new Word(50000, "01.01.2025", null, null
+                    , null,"Новое слово будет ждать вас здесь завтра"
+                    , null, false);
+        result.add(lastWord);
+        return result;
     }
 
 
