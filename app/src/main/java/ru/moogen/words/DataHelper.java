@@ -5,7 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class DataHelper extends SQLiteOpenHelper {
 
@@ -27,18 +31,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
     private Context mContext;
 
-
-
-
-
-
-
-
-
-
-
-
-
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
@@ -46,12 +38,26 @@ public class DataHelper extends SQLiteOpenHelper {
 
     public ArrayList<Word> getWordsFromDB(SQLiteDatabase db){
         ArrayList<Word> result = new ArrayList<>();
+        GregorianCalendar todayCalendar = new GregorianCalendar();
         Cursor cursor = db.query(TABLE_WORDS_NAME, null, null, null
         , null, null, COLUMN_ID);
-
         while (cursor.moveToNext()){
             int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
             String date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE));
+            GregorianCalendar wordCalendar = new GregorianCalendar();
+            Date date1 = Word.getDateFormat().parse(date, new ParsePosition(0));
+            wordCalendar.setTime(date1);
+            if (wordCalendar.get(Calendar.YEAR) > todayCalendar.get(Calendar.YEAR)){
+                break;
+            } else if(wordCalendar.get(Calendar.YEAR) == todayCalendar.get(Calendar.YEAR)){
+                if (wordCalendar.get(Calendar.MONTH) > todayCalendar.get(Calendar.MONTH)){
+                    break;
+                } else if(wordCalendar.get(Calendar.MONTH) == todayCalendar.get(Calendar.MONTH)){
+                    if (wordCalendar.get(Calendar.DAY_OF_MONTH) > todayCalendar.get(Calendar.DAY_OF_MONTH)){
+                        break;
+                    }
+                }
+            }
             String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
             String additionalName = null;
             if (!cursor.isNull(cursor.getColumnIndex(COLUMN_ADDITIONAL_NAME))){

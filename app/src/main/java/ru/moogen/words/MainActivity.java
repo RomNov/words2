@@ -1,5 +1,6 @@
 package ru.moogen.words;
 
+import android.app.FragmentManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DataFragment mDataFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +22,20 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();
         ArrayList<Word> words = dataHelper.getWordsFromDB(sqLiteDatabase);
 
-        for (int i = 0; i < words.size(); i++) {
-            System.out.println(words.get(i));
+        // Fragment для сохранения списка слов
+
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        mDataFragment = (DataFragment) fm.findFragmentByTag("data");
+
+        if (mDataFragment == null){
+            mDataFragment = new DataFragment();
+            fm.beginTransaction().add(mDataFragment, "data").commit();
+            mDataFragment.setmWords(words);
         }
+
+        // end Fragment
+
+
 
 
 
