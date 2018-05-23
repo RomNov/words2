@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 public class DataHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "words.db";
-    public static final int DATABASE_VERSION = 20;
+    public static final int DATABASE_VERSION = 21;
 
     public static final String TABLE_WORDS_NAME = "words";
 
@@ -69,7 +69,8 @@ public class DataHelper extends SQLiteOpenHelper {
             }
             String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
             String example = null;
-            if (!cursor.isNull(cursor.getColumnIndex(COLUMN_EXAMPLE))){
+            if (!cursor.isNull(cursor.getColumnIndex(COLUMN_EXAMPLE)) &&
+                    !cursor.getString(cursor.getColumnIndex(COLUMN_EXAMPLE)).startsWith("NULL")){
                 example = cursor.getString(cursor.getColumnIndex(COLUMN_EXAMPLE));
             }
             int favor = cursor.getInt(cursor.getColumnIndex(COLUMN_FAVOURITE));
@@ -79,7 +80,7 @@ public class DataHelper extends SQLiteOpenHelper {
             result.add(word);
             }
             Word lastWord = new Word(50000, "01.01.2025", null, null
-                    , null,"Новое слово будет ждать вас здесь завтра"
+                    , null,"<p>новое слово будет ждать вас здесь завтра</p>"
                     , null, false);
         result.add(lastWord);
         return result;

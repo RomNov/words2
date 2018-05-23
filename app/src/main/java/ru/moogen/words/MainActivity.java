@@ -2,6 +2,7 @@ package ru.moogen.words;
 
 import android.app.FragmentManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,7 +10,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private DataFragment mDataFragment;
+    private ArrayList<Word> words;
+    private ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         DataHelper dataHelper = new DataHelper(this);
         SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();
-        ArrayList<Word> words = dataHelper.getWordsFromDB(sqLiteDatabase);
+        words = dataHelper.getWordsFromDB(sqLiteDatabase);
 
         // Fragment для сохранения списка слов
 
@@ -35,10 +39,20 @@ public class MainActivity extends AppCompatActivity {
 
         // end Fragment
 
+        pager = findViewById(R.id.view_pager);
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager(), words));
+        pager.setCurrentItem(words.size() - 2);
 
 
 
+    }
 
+
+    public void changeFragment(int newPos){
+        if (newPos < 0 || newPos >= words.size()){
+            return;
+        }
+        pager.setCurrentItem(newPos);
     }
 
 
