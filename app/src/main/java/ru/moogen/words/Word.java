@@ -22,6 +22,15 @@ public class Word implements Comparable<Word> {
     private String description;
     private String example;
     private boolean favourite;
+
+    public Date getDateClassDate() {
+        return dateClassDate;
+    }
+
+    public void setDateClassDate(Date dateClassDate) {
+        this.dateClassDate = dateClassDate;
+    }
+
     private Date dateClassDate;
 
 

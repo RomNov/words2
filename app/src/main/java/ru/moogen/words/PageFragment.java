@@ -102,16 +102,54 @@ public class PageFragment extends Fragment {
 
         fab = result.findViewById(R.id.fab);
         upDateTextView = result.findViewById(R.id.text_view_up_date);
+        upDateTextView.setText(Word.getShortDateFormat().format(word.getDateClassDate()));
+
+
+
+
         imageButtonLeft = result.findViewById(R.id.button_up_left);
         imageButtonRight = result.findViewById(R.id.button_up_right);
         googleButton = result.findViewById(R.id.button_google);
+
+        imageButtonRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)PageFragment.this.getActivity()).changeFragment(position+1);
+            }
+        });
+        imageButtonLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)PageFragment.this.getActivity()).changeFragment(position-1);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (position == size -1){
             fab.setVisibility(View.GONE);
             imageButtonRight.setVisibility(View.GONE);
             googleButton.setVisibility(View.GONE);
             descriptionTextView.setTextSize(24);
+            upDateTextView.setText("будущий день");
+        } else if(position == 0){
+            imageButtonLeft.setVisibility(View.GONE);
         }
+
+
 
 
 

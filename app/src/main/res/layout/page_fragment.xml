@@ -31,7 +31,7 @@
                 <TextView
                     android:id="@+id/text_view_up_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="9 мая"
                     android:textSize="14sp"
@@ -131,8 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:paddingLeft="16dp"
                 android:text="@string/google"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
