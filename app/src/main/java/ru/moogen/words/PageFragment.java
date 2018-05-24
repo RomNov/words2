@@ -1,5 +1,7 @@
 package ru.moogen.words;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -70,7 +72,7 @@ public class PageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         setRetainInstance(true);
         View result = inflater.inflate(R.layout.page_fragment, container, false);
 
@@ -101,6 +103,37 @@ public class PageFragment extends Fragment {
         }
 
         fab = result.findViewById(R.id.fab);
+        if (word.isFavourite()){
+            fab.setImageResource(R.mipmap.ic_fab_yellow_star);
+        }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean currentValue = word.isFavourite();
+                word.setFavourite(!currentValue);
+                if (currentValue){
+                    fab.setImageResource(R.mipmap.ic_fab_gray_star);
+                } else {
+                    fab.setImageResource(R.mipmap.ic_fab_yellow_star);
+                }
+                final int favor = currentValue?0:1;
+                final int id = word.getId();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        DataHelper dataHelper = new DataHelper(getActivity());
+                        SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put(DataHelper.COLUMN_FAVOURITE, favor);
+                        sqLiteDatabase.update(DataHelper.TABLE_WORDS_NAME, contentValues
+                        , DataHelper.COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                    }
+                }).start();
+            }
+        });
+
+
+
         upDateTextView = result.findViewById(R.id.text_view_up_date);
         upDateTextView.setText(Word.getShortDateFormat().format(word.getDateClassDate()));
 

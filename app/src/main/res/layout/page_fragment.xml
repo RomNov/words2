@@ -19,14 +19,13 @@
 
                 <ImageButton
                     android:id="@+id/button_up_left"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="16dp"
                     android:adjustViewBounds="true"
-                    android:background="@mipmap/ic_launcher_round"
-                    android:scaleType="fitXY"
-                    />
+                    android:background="@mipmap/ic_arrow_left"
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/text_view_up_date"
@@ -34,20 +33,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="9 мая"
-                    android:textSize="14sp"
-                    />
-
+                    android:textSize="18sp" />
 
 
                 <ImageButton
                     android:id="@+id/button_up_right"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="18dp"
-                    android:background="@drawable/ic_launcher_background"
-                    android:scaleType="centerCrop"
-                    />
+                    android:layout_marginTop="16dp"
+                    android:background="@mipmap/ic_arrow_right"
+                    android:scaleType="centerCrop" />
 
             </LinearLayout>
 
@@ -68,27 +64,26 @@
                 android:layout_marginTop="8dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_view_additional_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/text_view_etim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 android:background="@color/colorAccent"
                 android:paddingBottom="4dp"
                 android:paddingLeft="16dp"
@@ -96,7 +91,9 @@
                 android:paddingTop="4dp"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/background_light"
-                android:textStyle="bold|italic" />
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/text_view_description"
@@ -105,7 +102,8 @@
                 android:layout_marginTop="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:textSize="18sp" />
 
             <View
                 android:id="@+id/divider_pager"
@@ -119,11 +117,12 @@
 
             <TextView
                 android:id="@+id/text_view_example"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:paddingRight="16dp"
+                android:textSize="18sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button_google"
@@ -131,10 +130,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
                 android:text="@string/google"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="18sp" />
 
 
 
@@ -148,5 +147,5 @@
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@mipmap/ic_launcher_round" />
+        android:src="@mipmap/ic_fab_gray_star" />
 </FrameLayout>
