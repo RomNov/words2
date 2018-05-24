@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:title="@string/random_word"
+        android:id="@+id/menu_el_random"
+        android:icon="@mipmap/ic_fab_gray_star"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="@string/share_word"
+        android:id="@+id/menu_el_share"
+        android:icon="@mipmap/ic_fab_yellow_star"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="@string/search_word"
+        android:id="@+id/menu_el_search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="collapseActionView|always"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
+
+</menu>

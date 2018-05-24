@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DataFragment mDataFragment;
     private ArrayList<Word> words;
+
+
+
     private ViewPager pager;
 
     @Override
@@ -55,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         pager.setCurrentItem(newPos);
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
 }

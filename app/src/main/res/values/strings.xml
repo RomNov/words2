@@ -4,4 +4,7 @@
     <string name="short_date_format">d MMMM</string>
     <string name="locale">ru</string>
     <string name="google">найти в google</string>
+    <string name="random_word">случайное слово</string>
+    <string name="share_word">поделиться словом</string>
+    <string name="search_word">найти слово</string>
 </resources>
