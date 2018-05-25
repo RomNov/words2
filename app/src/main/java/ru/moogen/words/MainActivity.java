@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -64,5 +65,32 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int menuId = item.getItemId();
+        switch (menuId){
+            case R.id.menu_el_random:
+                randomPosition();
+                return true;
+        }
+        return false;
+    }
+
+    public void randomPosition(){
+        int max = words.size() - 1;
+        if (max <= 0){
+            return;
+        }
+        int currentPosition = pager.getCurrentItem();
+        int randomPosition = (int)(Math.random()*max);
+        System.out.println(randomPosition);
+        if (randomPosition == currentPosition){
+            randomPosition();
+            return;
+        }
+        pager.setCurrentItem(randomPosition);
+    }
+
 
 }

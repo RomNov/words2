@@ -21,6 +21,7 @@ public class Word implements Comparable<Word> {
     private String etim;
     private String description;
     private String example;
+    private String searchName;
     private boolean favourite;
 
     public Date getDateClassDate() {
@@ -64,6 +65,9 @@ public class Word implements Comparable<Word> {
             dateClassDate = DATE_FORMAT.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        if (!(name == null)) {
+            searchName = name.replace("\u0301", "");
         }
     }
 
