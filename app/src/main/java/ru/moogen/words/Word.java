@@ -22,6 +22,7 @@ public class Word implements Comparable<Word> {
     private String description;
     private String example;
     private String searchName;
+    private String descriptionSend;
     private boolean favourite;
 
     public Date getDateClassDate() {
@@ -50,6 +51,14 @@ public class Word implements Comparable<Word> {
                 new Locale(res.getString(R.string.locale)));
     }
 
+    public String getDescriptionSend() {
+        return descriptionSend;
+    }
+
+    public void setDescriptionSend(String descriptionSend) {
+        this.descriptionSend = descriptionSend;
+    }
+
     public Word(int id, String date, String name, String additionalName, String etim,
                 String description, String example, boolean favourite) {
         this.id = id;
@@ -68,7 +77,11 @@ public class Word implements Comparable<Word> {
         }
         if (!(name == null)) {
             searchName = name.replace("\u0301", "");
+            descriptionSend = description.replace("<p>", "")
+                    .replace("</p>", "");
+
         }
+
     }
 
     @Override

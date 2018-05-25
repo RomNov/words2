@@ -5,14 +5,14 @@
     <item
         android:title="@string/random_word"
         android:id="@+id/menu_el_random"
-        android:icon="@mipmap/ic_fab_gray_star"
+        android:icon="@mipmap/ic_menu_random"
         app:showAsAction="always"/>
 
     <item
         android:title="@string/share_word"
         android:id="@+id/menu_el_share"
-        android:icon="@mipmap/ic_fab_yellow_star"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_share"/>
 
     <item
         android:title="@string/search_word"
