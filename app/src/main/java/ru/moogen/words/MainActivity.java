@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.setType("text/plain");
                 startActivity(intent);
                 return true;
+            case R.id.menu_el_search:
+                return true;
         }
         return false;
     }

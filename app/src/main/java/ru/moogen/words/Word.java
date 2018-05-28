@@ -21,9 +21,20 @@ public class Word implements Comparable<Word> {
     private String etim;
     private String description;
     private String example;
+
+
+
     private String searchName;
     private String descriptionSend;
     private boolean favourite;
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
 
     public Date getDateClassDate() {
         return dateClassDate;

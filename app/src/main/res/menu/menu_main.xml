@@ -12,7 +12,7 @@
         android:title="@string/share_word"
         android:id="@+id/menu_el_share"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_share"/>
+        android:icon="@mipmap/ic_menu_share"/>
 
     <item
         android:title="@string/search_word"
