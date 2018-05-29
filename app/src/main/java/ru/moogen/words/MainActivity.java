@@ -1,23 +1,31 @@
 package ru.moogen.words;
 
-import android.app.FragmentManager;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ShareActionProvider;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+
+    static final String EXTRA_SEARCH_LIST = "ru.moogen.EXTRA_SEARCH_LIST";
+    static ArrayList<Word> searchResult;
 
 
     private DataFragment mDataFragment;
     private ArrayList<Word> words;
     private String appPackageName;
+
+    private SearchView searchView;
+    MenuItem searchItem;
 
 
 
@@ -66,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        searchItem = menu.findItem(R.id.menu_el_search);
 
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
 
         return true;
     }
@@ -102,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_el_search:
                 return true;
+
         }
         return false;
     }
@@ -122,8 +134,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        searchResult = new ArrayList<>();
+        for (int i = 0; i < words.size()-1; i++) {
+            if (words.get(i).getSearchName().contains(query)){
+                searchResult.add(words.get(i));
+            }
+        }
+        Intent intent = new Intent(this, SearchResult.class);
+        startActivityForResult(intent, 111);
+        return true;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        int id = 0;
+        if (requestCode == 111 && resultCode == Activity.RESULT_OK){
+            if (data != null){
+                id = data.getIntExtra("position", 0);
+            }
+        }
+        pager.setCurrentItem(id);
+        searchView.setIconified(true);
+        MenuItemCompat.collapseActionView(searchItem);
+    }
 }
