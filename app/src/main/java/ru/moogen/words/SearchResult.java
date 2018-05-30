@@ -1,5 +1,6 @@
 package ru.moogen.words;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +15,21 @@ public class SearchResult extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
 
+
         ArrayList<Word> wordList = MainActivity.searchResult;
 
 
+
+
         if (wordList.size() > 0){
+            ListView listView = findViewById(R.id.list_view);
+            ListViewSearchAdapter listViewSearchAdapter = new ListViewSearchAdapter(this, wordList);
+            listView.setAdapter(listViewSearchAdapter);
+        } else {
+            wordList = new ArrayList<>();
+            Word word = new Word(89000, "01.01.1990", "По вашему запросу ничего не найдено"
+            , null, null, " ", null, false);
+            wordList.add(word);
             ListView listView = findViewById(R.id.list_view);
             ListViewSearchAdapter listViewSearchAdapter = new ListViewSearchAdapter(this, wordList);
             listView.setAdapter(listViewSearchAdapter);

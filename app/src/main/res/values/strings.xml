@@ -7,4 +7,7 @@
     <string name="random_word">случайное слово</string>
     <string name="share_word">поделиться словом</string>
     <string name="search_word">найти слово</string>
+    <string name="all_word_menu">все слова</string>
+    <string name="favourite">избранное</string>
+    <string name="word_offers">предложить слово</string>
 </resources>

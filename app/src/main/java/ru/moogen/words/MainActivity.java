@@ -114,7 +114,25 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             case R.id.menu_el_search:
                 return true;
 
-        }
+            case R.id.menu_el_all_words:
+                Intent intent1 = new Intent(this, ListWordsActivity.class);
+                intent1.putExtra("type", 1);
+                startActivityForResult(intent1, 112);
+                return true;
+            case R.id.menu_el_fav_words:
+                Intent intent2 = new Intent(this, ListWordsActivity.class);
+                intent2.putExtra("type", 2);
+                startActivityForResult(intent2, 112);
+                return true;
+            case R.id.menu_el_word_offer:
+                Intent intent3 = new Intent();
+                intent3.setAction(Intent.ACTION_SEND);
+                intent3.putExtra(Intent.EXTRA_SUBJECT, "новое слово");
+                intent3.putExtra(Intent.EXTRA_EMAIL, new String[] { "m80gen@gmail.com" });
+                intent3.setType("message/partial");
+                startActivity(intent3);
+                return true;
+                }
         return false;
     }
 
@@ -154,14 +172,22 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        int id = 0;
-        if (requestCode == 111 && resultCode == Activity.RESULT_OK){
-            if (data != null){
+
+        if (requestCode == 111 && resultCode == Activity.RESULT_OK) {
+            int id = 0;
+            if (data != null) {
                 id = data.getIntExtra("position", 0);
             }
+
+            pager.setCurrentItem(id);
+            searchView.setIconified(true);
+            MenuItemCompat.collapseActionView(searchItem);
+        } else if (requestCode == 112 && resultCode == Activity.RESULT_OK){
+            int id = 0;
+            if (data != null) {
+                id = data.getIntExtra("position", 0);
+            }
+            pager.setCurrentItem(id);
         }
-        pager.setCurrentItem(id);
-        searchView.setIconified(true);
-        MenuItemCompat.collapseActionView(searchItem);
     }
 }

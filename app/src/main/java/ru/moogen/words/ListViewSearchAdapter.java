@@ -94,6 +94,9 @@ public class ListViewSearchAdapter extends ArrayAdapter {
                 appCompatActivity.finish();
             }
         });
+        if (word.getId() == 89000){
+            imageButton.setVisibility(View.GONE);
+        }
         return view;
     }
 }

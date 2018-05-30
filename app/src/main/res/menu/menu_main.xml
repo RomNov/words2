@@ -21,4 +21,19 @@
         app:showAsAction="collapseActionView|always"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 
+    <item
+        android:title="@string/all_word_menu"
+        android:id="@+id/menu_el_all_words"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/favourite"
+        android:id="@+id/menu_el_fav_words"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/word_offers"
+        android:id="@+id/menu_el_word_offer"
+        app:showAsAction="never"/>
+
 </menu>
