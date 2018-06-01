@@ -9,5 +9,6 @@
     <string name="search_word">найти слово</string>
     <string name="all_word_menu">все слова</string>
     <string name="favourite">избранное</string>
-    <string name="word_offers">предложить слово</string>
+    <string name="word_offers">предложить слово по e-mail</string>
+    <string name="new_tomorrow_word"><![CDATA[<p>новое слово будет ждать вас здесь завтра</p>]]></string>
 </resources>
