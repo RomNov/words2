@@ -39,7 +39,9 @@ public class ListWordsActivity extends AppCompatActivity {
             }
 
             if (wordList.size() > 0){
-                wordList.remove(wordList.size()-1);
+                if (type != 2){
+                    wordList.remove(wordList.size()-1);
+                }
                 ListView listView = findViewById(R.id.list_view);
                 ListViewSearchAdapter listViewSearchAdapter = new ListViewSearchAdapter(this, wordList);
                 listView.setAdapter(listViewSearchAdapter);
