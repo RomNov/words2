@@ -21,18 +21,18 @@
         android:background="@color/colorPrimary"
         android:paddingBottom="8dp"
         android:paddingStart="8dp"
-        android:text="уроборос"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/text_view_widget_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
-        android:text="привет как дела нормально нормально нереально"
         android:textSize="14sp"
-        android:textColor="#000"/>
+        android:textColor="#000"
+        />
 
 </LinearLayout>

@@ -36,6 +36,24 @@ public class DataHelper extends SQLiteOpenHelper {
         mContext = context;
     }
 
+    public Word getWord(String date, SQLiteDatabase db){
+        Word word = null;
+        String[] strArr = new String[]{date};
+        String selection = COLUMN_DATE + " = ?";
+        Cursor cursor = db.query(TABLE_WORDS_NAME, null, selection, strArr, null, null, null);
+        if (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+            String date2 = cursor.getString(cursor.getColumnIndex(COLUMN_DATE));
+            String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+            String additionalName = cursor.getString(cursor.getColumnIndex(COLUMN_ADDITIONAL_NAME));
+            String etim =  cursor.getString(cursor.getColumnIndex(COLUMN_ETIM));
+            String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
+            String example =  cursor.getString(cursor.getColumnIndex(COLUMN_EXAMPLE));
+            word = new Word(id, date2, name, additionalName, etim, description, example, false);
+        }
+        return word;
+    }
+
     public ArrayList<Word> getWordsFromDB(SQLiteDatabase db){
         ArrayList<Word> result = new ArrayList<>();
         GregorianCalendar todayCalendar = new GregorianCalendar();
