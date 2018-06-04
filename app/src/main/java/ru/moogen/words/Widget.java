@@ -1,5 +1,7 @@
 package ru.moogen.words;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -7,10 +9,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.widget.RemoteViews;
 
 import java.util.Date;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class Widget extends AppWidgetProvider {
     @Override
@@ -40,6 +45,23 @@ public class Widget extends AppWidgetProvider {
             AppWidgetManager.getInstance(context)
                     .updateAppWidget(new ComponentName(context, Widget.class), views);
         }
+
+        Date todayDate = new Date();
+        int hour = todayDate.getHours();
+        if (hour >= 12 && hour <= 13){
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle(name)
+                            .setContentText(Html.fromHtml(description));
+
+            Notification notification = builder.build();
+
+            NotificationManager notificationManager =
+                    (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(1, notification);
+        }
+
     }
 
     @Override
