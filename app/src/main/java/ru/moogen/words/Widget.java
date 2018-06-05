@@ -40,6 +40,7 @@ public class Widget extends AppWidgetProvider {
 
             views.setTextViewText(R.id.text_view_widget_name, name);
             views.setTextViewText(R.id.text_view_widget_description, Html.fromHtml(description));
+            views.setOnClickPendingIntent(R.id.widget_layout, pending);
 
 
             AppWidgetManager.getInstance(context)
@@ -49,11 +50,15 @@ public class Widget extends AppWidgetProvider {
         Date todayDate = new Date();
         int hour = todayDate.getHours();
         if (hour >= 12 && hour <= 13){
+            Intent intent = new Intent(context, MainActivity.class);
+            PendingIntent pending = PendingIntent.getActivity(context, 0,intent, 0);
             NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle(name)
-                            .setContentText(Html.fromHtml(description));
+                            .setContentText(Html.fromHtml(description))
+                    .setContentIntent(pending)
+                    .setAutoCancel(true);
 
             Notification notification = builder.build();
 
