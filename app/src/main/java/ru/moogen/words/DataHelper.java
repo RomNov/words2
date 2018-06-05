@@ -1,5 +1,6 @@
 package ru.moogen.words;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,7 +15,7 @@ import java.util.GregorianCalendar;
 public class DataHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "words.db";
-    public static final int DATABASE_VERSION = 22;
+    public static final int DATABASE_VERSION = 26;
 
     public static final String TABLE_WORDS_NAME = "words";
 
@@ -185,8 +186,28 @@ public class DataHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        ArrayList<Integer> integerArrayList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("SELECT " + COLUMN_ID + " FROM " + TABLE_WORDS_NAME +
+        " WHERE " + COLUMN_FAVOURITE + " = 1;", null);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+            integerArrayList.add(id);
+            System.out.println(id);
+        }
+
+
+
+
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORDS_NAME);
-        onCreate(db); // TODO СДЕЛАТЬ ПЕРЕХОД ИЗБРАННОГО В НОВУЮ БАЗУ
+        onCreate(db);
+
+        for (int i = 0; i < integerArrayList.size(); i++) {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_FAVOURITE, "1");
+            db.update(TABLE_WORDS_NAME, values, COLUMN_ID + " = ?", new String[]{integerArrayList.get(i).toString()});
+        }
+
 
     }
 }
