@@ -11,14 +11,12 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     static final String EXTRA_SEARCH_LIST = "ru.moogen.EXTRA_SEARCH_LIST";
     static ArrayList<Word> searchResult;
-
 
     private DataFragment mDataFragment;
     private ArrayList<Word> words;
@@ -26,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private SearchView searchView;
     MenuItem searchItem;
-
-
 
     private ViewPager pager;
 
@@ -42,30 +38,24 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();
         words = dataHelper.getWordsFromDB(sqLiteDatabase);
 
-        // Fragment для сохранения списка слов
-
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         mDataFragment = (DataFragment) fm.findFragmentByTag("data");
 
-        if (mDataFragment == null){
+        if (mDataFragment == null) {
             mDataFragment = new DataFragment();
             fm.beginTransaction().add(mDataFragment, "data").commit();
             mDataFragment.setmWords(words);
         }
 
-        // end Fragment
-
         pager = findViewById(R.id.view_pager);
         pager.setAdapter(new PageAdapter(getSupportFragmentManager(), words));
         pager.setCurrentItem(words.size() - 2);
-
         appPackageName = getPackageName();
-
     }
 
 
-    public void changeFragment(int newPos){
-        if (newPos < 0 || newPos >= words.size()){
+    public void changeFragment(int newPos) {
+        if (newPos < 0 || newPos >= words.size()) {
             return;
         }
         pager.setCurrentItem(newPos);
@@ -75,17 +65,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         searchItem = menu.findItem(R.id.menu_el_search);
-
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
-        switch (menuId){
+        switch (menuId) {
             case R.id.menu_el_random:
                 randomPosition();
                 return true;
@@ -113,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 return true;
             case R.id.menu_el_search:
                 return true;
-
             case R.id.menu_el_all_words:
                 Intent intent1 = new Intent(this, ListWordsActivity.class);
                 intent1.putExtra("type", 1);
@@ -128,23 +115,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 Intent intent3 = new Intent();
                 intent3.setAction(Intent.ACTION_SEND);
                 intent3.putExtra(Intent.EXTRA_SUBJECT, "новое слово");
-                intent3.putExtra(Intent.EXTRA_EMAIL, new String[] { "m80gen@gmail.com" });
+                intent3.putExtra(Intent.EXTRA_EMAIL, new String[]{"m80gen@gmail.com"});
                 intent3.setType("message/partial");
                 startActivity(intent3);
                 return true;
-                }
+        }
         return false;
     }
 
-    public void randomPosition(){
+    public void randomPosition() {
         int max = words.size() - 1;
-        if (max <= 0){
+        if (max <= 0) {
             return;
         }
         int currentPosition = pager.getCurrentItem();
-        int randomPosition = (int)(Math.random()*max);
+        int randomPosition = (int) (Math.random() * max);
         System.out.println(randomPosition);
-        if (randomPosition == currentPosition){
+        if (randomPosition == currentPosition) {
             randomPosition();
             return;
         }
@@ -155,8 +142,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextSubmit(String query) {
         searchResult = new ArrayList<>();
-        for (int i = 0; i < words.size()-1; i++) {
-            if (words.get(i).getSearchName().contains(query)){
+        for (int i = 0; i < words.size() - 1; i++) {
+            if (words.get(i).getSearchName().contains(query)) {
                 searchResult.add(words.get(i));
             }
         }
@@ -182,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             pager.setCurrentItem(id);
             searchView.setIconified(true);
             MenuItemCompat.collapseActionView(searchItem);
-        } else if (requestCode == 112 && resultCode == Activity.RESULT_OK){
+        } else if (requestCode == 112 && resultCode == Activity.RESULT_OK) {
             int id = 0;
             if (data != null) {
                 id = data.getIntExtra("position", 0);

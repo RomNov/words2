@@ -12,7 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.widget.RemoteViews;
-
 import java.util.Date;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -29,14 +28,13 @@ public class Widget extends AppWidgetProvider {
         String strToday = Word.getDateFormat().format(today);
         Word word = dataHelper.getWord(strToday, sqLiteDatabase);
 
-
         String name = word.getName();
         String description = word.getDescription();
         for (int i = 0; i < appWidgetIds.length; i++) {
 
             Intent intent = new Intent(context, MainActivity.class);
-            PendingIntent pending = PendingIntent.getActivity(context, 0,intent, 0);
-            RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.widget_layout);
+            PendingIntent pending = PendingIntent.getActivity(context, 0, intent, 0);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
             views.setTextViewText(R.id.text_view_widget_name, name);
             views.setTextViewText(R.id.text_view_widget_description, Html.fromHtml(description));
@@ -49,16 +47,16 @@ public class Widget extends AppWidgetProvider {
 
         Date todayDate = new Date();
         int hour = todayDate.getHours();
-        if (hour >= 12 && hour <= 13){
+        if (hour >= 12 && hour <= 13) {
             Intent intent = new Intent(context, MainActivity.class);
-            PendingIntent pending = PendingIntent.getActivity(context, 0,intent, 0);
+            PendingIntent pending = PendingIntent.getActivity(context, 0, intent, 0);
             NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle(name)
                             .setContentText(Html.fromHtml(description))
-                    .setContentIntent(pending)
-                    .setAutoCancel(true);
+                            .setContentIntent(pending)
+                            .setAutoCancel(true);
 
             Notification notification = builder.build();
 

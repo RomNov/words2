@@ -55,7 +55,7 @@ public class ListViewSearchAdapter extends ArrayAdapter {
         TextView textView = view.findViewById(R.id.list_item_text_view);
         textView.setText(word.getName());
         final ImageButton imageButton = view.findViewById(R.id.list_item_image_button);
-        if (!word.isFavourite()){
+        if (!word.isFavourite()) {
             imageButton.setImageResource(R.mipmap.ic_fab_gray_star);
         }
 
@@ -65,12 +65,12 @@ public class ListViewSearchAdapter extends ArrayAdapter {
                 boolean currentValue = word.isFavourite();
                 word.setFavourite(!currentValue);
                 final int id = word.getId();
-                if (currentValue){
+                if (currentValue) {
                     imageButton.setImageResource(R.mipmap.ic_fab_gray_star);
                 } else {
                     imageButton.setImageResource(R.mipmap.ic_fab_yellow_star);
                 }
-                final int favor = currentValue?0:1;
+                final int favor = currentValue ? 0 : 1;
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -94,7 +94,7 @@ public class ListViewSearchAdapter extends ArrayAdapter {
                 appCompatActivity.finish();
             }
         });
-        if (word.getId() == 89000){
+        if (word.getId() == 89000) {
             imageButton.setVisibility(View.GONE);
         }
         return view;

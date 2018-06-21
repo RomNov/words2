@@ -22,11 +22,7 @@ public class Word implements Comparable<Word> {
     private String etim;
     private String description;
     private String example;
-
     private static Resources resources;
-
-
-
     private String searchName;
     private String descriptionSend;
     private boolean favourite;
@@ -58,7 +54,7 @@ public class Word implements Comparable<Word> {
         return SHORT_DATE_FORMAT;
     }
 
-    public static void setDateFormat(Resources res){
+    public static void setDateFormat(Resources res) {
         resources = res;
         DATE_FORMAT = new SimpleDateFormat(res.getString(R.string.date_format),
                 new Locale(res.getString(R.string.locale)));

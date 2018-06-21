@@ -16,43 +16,35 @@ public class ListWordsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_result);
 
-       int type = 0;
+        int type = 0;
 
         Intent data = getIntent();
-        if (data != null){
+        if (data != null) {
             type = data.getIntExtra("type", 0);
         }
 
+        DataHelper dataHelper = new DataHelper(this);
+        SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();
+        ArrayList<Word> wordList = dataHelper.getWordsFromDB(sqLiteDatabase);
 
-            DataHelper dataHelper = new DataHelper(this);
-            SQLiteDatabase sqLiteDatabase = dataHelper.getWritableDatabase();
-            ArrayList<Word> wordList = dataHelper.getWordsFromDB(sqLiteDatabase);
-
-            if (type == 2){
-                ArrayList<Word> newList = new ArrayList<>();
-                for (int i = 0; i < wordList.size(); i++) {
-                    if (wordList.get(i).isFavourite()){
-                        newList.add(wordList.get(i));
-                    }
+        if (type == 2) {
+            ArrayList<Word> newList = new ArrayList<>();
+            for (int i = 0; i < wordList.size(); i++) {
+                if (wordList.get(i).isFavourite()) {
+                    newList.add(wordList.get(i));
                 }
-                wordList = newList;
             }
+            wordList = newList;
+        }
 
-            if (wordList.size() > 0){
-                if (type != 2){
-                    wordList.remove(wordList.size()-1);
-                }
-                ListView listView = findViewById(R.id.list_view);
-                ListViewSearchAdapter listViewSearchAdapter = new ListViewSearchAdapter(this, wordList);
-                listView.setAdapter(listViewSearchAdapter);
+        if (wordList.size() > 0) {
+            if (type != 2) {
+                wordList.remove(wordList.size() - 1);
             }
-
-
-
-
-
-
-
+            ListView listView = findViewById(R.id.list_view);
+            ListViewSearchAdapter listViewSearchAdapter = new ListViewSearchAdapter(this, wordList);
+            listView.setAdapter(listViewSearchAdapter);
+        }
 
 
     }

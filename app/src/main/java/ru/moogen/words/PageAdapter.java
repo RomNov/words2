@@ -3,7 +3,6 @@ package ru.moogen.words;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
 import java.util.ArrayList;
 
 public class PageAdapter extends FragmentPagerAdapter {
@@ -18,7 +17,7 @@ public class PageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return(PageFragment.newInstance(wordsList.get(position), wordsList.size(), position));
+        return (PageFragment.newInstance(wordsList.get(position), wordsList.size(), position));
     }
 
     @Override

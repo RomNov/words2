@@ -60,7 +60,7 @@ public class PageFragment extends Fragment {
     }
 
 
-    public static PageFragment newInstance(Word word, int size, int position){
+    public static PageFragment newInstance(Word word, int size, int position) {
         PageFragment fragment = new PageFragment();
         fragment.setWord(word);
         fragment.setSize(size);
@@ -81,13 +81,13 @@ public class PageFragment extends Fragment {
         nameTextView = result.findViewById(R.id.text_view_name);
         nameTextView.setText(word.getName());
 
-        if (!(word.getAdditionalName() == null)){
+        if (!(word.getAdditionalName() == null)) {
             additionalNameTextView = result.findViewById(R.id.text_view_additional_name);
             additionalNameTextView.setText(word.getAdditionalName());
             additionalNameTextView.setVisibility(View.VISIBLE);
         }
 
-        if (!(word.getEtim() == null)){
+        if (!(word.getEtim() == null)) {
             etimTextView = result.findViewById(R.id.text_view_etim);
             etimTextView.setText(word.getEtim());
             etimTextView.setVisibility(View.VISIBLE);
@@ -96,7 +96,7 @@ public class PageFragment extends Fragment {
         descriptionTextView = result.findViewById(R.id.text_view_description);
         descriptionTextView.setText(Html.fromHtml(word.getDescription()));
 
-        if (!(word.getExample() == null)){
+        if (!(word.getExample() == null)) {
             exampleTextView = result.findViewById(R.id.text_view_example);
             exampleTextView.setText(word.getExample());
             exampleTextView.setVisibility(View.VISIBLE);
@@ -105,7 +105,7 @@ public class PageFragment extends Fragment {
         }
 
         fab = result.findViewById(R.id.fab);
-        if (word.isFavourite()){
+        if (word.isFavourite()) {
             fab.setImageResource(R.mipmap.ic_fab_yellow_star);
         }
         fab.setOnClickListener(new View.OnClickListener() {
@@ -113,12 +113,12 @@ public class PageFragment extends Fragment {
             public void onClick(View v) {
                 boolean currentValue = word.isFavourite();
                 word.setFavourite(!currentValue);
-                if (currentValue){
+                if (currentValue) {
                     fab.setImageResource(R.mipmap.ic_fab_gray_star);
                 } else {
                     fab.setImageResource(R.mipmap.ic_fab_yellow_star);
                 }
-                final int favor = currentValue?0:1;
+                final int favor = currentValue ? 0 : 1;
                 final int id = word.getId();
                 new Thread(new Runnable() {
                     @Override
@@ -128,25 +128,19 @@ public class PageFragment extends Fragment {
                         ContentValues contentValues = new ContentValues();
                         contentValues.put(DataHelper.COLUMN_FAVOURITE, favor);
                         sqLiteDatabase.update(DataHelper.TABLE_WORDS_NAME, contentValues
-                        , DataHelper.COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+                                , DataHelper.COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
                     }
                 }).start();
             }
         });
 
 
-
         upDateTextView = result.findViewById(R.id.text_view_up_date);
         upDateTextView.setText(Word.getShortDateFormat().format(word.getDateClassDate()));
-
-
-
 
         imageButtonLeft = result.findViewById(R.id.button_up_left);
         imageButtonRight = result.findViewById(R.id.button_up_right);
         googleButton = result.findViewById(R.id.button_google);
-
-
 
         googleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,51 +154,25 @@ public class PageFragment extends Fragment {
         imageButtonRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)PageFragment.this.getActivity()).changeFragment(position+1);
+                ((MainActivity) PageFragment.this.getActivity()).changeFragment(position + 1);
             }
         });
         imageButtonLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)PageFragment.this.getActivity()).changeFragment(position-1);
+                ((MainActivity) PageFragment.this.getActivity()).changeFragment(position - 1);
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        if (position == size -1){
+        if (position == size - 1) {
             fab.setVisibility(View.GONE);
             imageButtonRight.setVisibility(View.GONE);
             googleButton.setVisibility(View.GONE);
             descriptionTextView.setTextSize(24);
             upDateTextView.setText("будущий день");
-        } else if(position == 0){
+        } else if (position == 0) {
             imageButtonLeft.setVisibility(View.GONE);
         }
-
-
-
-
-
-
-
-
-
-
-
 
         return result;
     }
